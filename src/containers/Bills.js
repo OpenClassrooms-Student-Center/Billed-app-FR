@@ -27,6 +27,7 @@ export default class {
     $('#modaleFile').modal('show')
   }
 
+  // not need to cover this function by tests
   getBills = () => {
     const userEmail = localStorage.getItem('user') ?
       JSON.parse(localStorage.getItem('user')).email : ""
