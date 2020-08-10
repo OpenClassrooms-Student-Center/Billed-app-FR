@@ -3,18 +3,6 @@ import Login from '../containers/Login.js'
 import { ROUTES } from "../constants/routes"
 import { fireEvent, screen } from "@testing-library/dom"
 
-// unit tests for Login Component
-
-// describe('Login Page', () => {
-//   describe("Si l'utilisateur va sur la home '/'", () => {
-//     test("La page est rendue correctement", () => {
-//       document.body.innerHTML = LoginUI()
-//       const page = screen.getByTestId("login-page")
-//       expect(page).toMatchSnapshot()
-//     })
-//   })
-// })
-
 describe("Given that I am a user on login page", () => {
   describe("When I do not fill fields and I click on employee button Login In", () => {
     test("Then It should renders Login page", () => {
