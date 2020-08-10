@@ -13,7 +13,6 @@ describe('Given I am connected as an Admin', () => {
   describe('When I am on Dashboard page, there are bills, and there is one pending', () => {
     test('Then, filteredBills by pending status should return 1 bill', () => {
       const filtered_bills = filteredBills(bills, "pending")
-      console.log(bills)
       expect(filtered_bills.length).toBe(1)
     })
   })

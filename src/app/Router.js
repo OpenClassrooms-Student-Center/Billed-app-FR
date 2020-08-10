@@ -14,7 +14,6 @@ export default () => {
   rootDiv.innerHTML = ROUTES({ pathname: window.location.pathname })
 
   window.onNavigate = (pathname) => {
-    console.log('on navigate');
 
     window.history.pushState(
       {},
@@ -63,19 +62,16 @@ export default () => {
   
   window.onpopstate = (e) => {
     const user = JSON.parse(localStorage.getItem('user'))
-    console.log('onpopstate', e)
     if (window.location.pathname === "/" && !user) {
       document.body.style.backgroundColor="#0E5AE5"
       rootDiv.innerHTML = ROUTES({ pathname: window.location.pathname })
     }
     else if (user) {
-      console.log('PREVIOUS_LOCATION', PREVIOUS_LOCATION)
       onNavigate(PREVIOUS_LOCATION)
     }
   }
 
   if (window.location.pathname === "/" && window.location.hash === "") {
-    console.log('window.hash', window.location.hash)
     new Login({ document, localStorage, onNavigate, PREVIOUS_LOCATION, firestore })
     document.body.style.backgroundColor="#0E5AE5"
   } else if (window.location.hash !== "") {

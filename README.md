@@ -1,10 +1,9 @@
 **How to run the App localy**:
 
 *clone the project*
-`$ git clone https://github.com/OpenClassrooms-Student-Center/P6-front-end-testing.git`
 
 *go to the cloned repo*
-`$ cd P6-front-end-testing`
+`$ cd Billed-app-FR`
 
 *install npm packages (described in package.json)*
 `$ npm install`
