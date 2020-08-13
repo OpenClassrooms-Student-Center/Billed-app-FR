@@ -36,7 +36,7 @@ $ npm run test
 
 **Comment lancer un seul test :**
 
-Insatllez jest-cli
+Installez jest-cli :
 
 ```
 $npm i -g jest-cli
