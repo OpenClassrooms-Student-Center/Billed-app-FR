@@ -1,24 +1,26 @@
 **Comment lancer l'application en local** :
 
-Clonez le projet
-`$ git clone https://github.com/OpenClassrooms-Student-Center/P6-front-end-testing.git`
+Clonez le projet :
+```
+$ git clone https://github.com/OpenClassrooms-Student-Center/P6-front-end-testing.git
+```
 
-Allez au repo cloné
+Allez au repo cloné :
 ```
 $ cd P6-front-end-testing
 ```
 
-Installez les packages npm (décrits dans `package.json`)
+Installez les packages npm (décrits dans `package.json`) :
 ```
 $ npm install
 ```
 
-Installez live-server pour lancer un serveur local
+Installez live-server pour lancer un serveur local :
 ```
 $ npm install -g live-server
 ```
 
-Lancez l'application
+Lancez l'application :
 ```
 $ live-server
 ```
