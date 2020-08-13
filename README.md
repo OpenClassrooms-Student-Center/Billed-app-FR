@@ -2,12 +2,12 @@
 
 Clonez le projet :
 ```
-$ git clone https://github.com/OpenClassrooms-Student-Center/P6-front-end-testing.git
+$ git clone https://github.com/OpenClassrooms-Student-Center/Billed-app-FR.git
 ```
 
 Allez au repo cloné :
 ```
-$ cd P6-front-end-testing
+$ cd Billed-app-FR
 ```
 
 Installez les packages npm (décrits dans `package.json`) :
