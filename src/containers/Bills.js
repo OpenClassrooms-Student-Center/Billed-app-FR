@@ -39,7 +39,7 @@ export default class {
         const bills = snapshot.docs
           .map(doc => ({
             ...doc.data(),
-            date: formatDate(doc.data().date),
+            date: doc.data().date,
             status: formatStatus(doc.data().status)
           }))
           .filter(bill => bill.email === userEmail)
