@@ -37,12 +37,12 @@ export default class {
       .get()
       .then(snapshot => {
         const bills = snapshot.docs
+        .filter(bill => bill.data().email === userEmail)      //No need to map useless entries, so we filter before we map ...
           .map(doc => ({
             ...doc.data(),
             date: formatDate(doc.data().date),
             status: formatStatus(doc.data().status)
           }))
-          .filter(bill => bill.email === userEmail)
         return bills
       })
       .catch(error => error)
