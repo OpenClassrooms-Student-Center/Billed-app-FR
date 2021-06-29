@@ -6,7 +6,7 @@ import { fireEvent, screen } from "@testing-library/dom"
 describe("Given that I am a user on login page", () => {
   describe("When I do not fill fields and I click on employee button Login In", () => {
     test("Then It should renders Login page", () => {
-      document.body.innerHTML = LoginUI()
+      document.body.innerHTML = LoginUI();
 
       const inputEmailUser = screen.getByTestId("employee-email-input")
       expect(inputEmailUser.value).toBe("")
@@ -152,9 +152,11 @@ describe("Given that I am a user on login page", () => {
     })
   })
 
+  
   describe("When I do fill fields in correct format and I click on admin button Login In", () => {
     test("Then I should be identified as an HR admin in app", () => {
       document.body.innerHTML = LoginUI()
+  
       const inputData = {
         type: "Admin",
         email: "johndoe@email.com",
@@ -162,14 +164,16 @@ describe("Given that I am a user on login page", () => {
         status: "connected"
       }
 
+
       const inputEmailUser = screen.getByTestId("admin-email-input")
       fireEvent.change(inputEmailUser, { target: { value: inputData.email } })
       expect(inputEmailUser.value).toBe(inputData.email)
-          
+      
+      
       const inputPasswordUser = screen.getByTestId("admin-password-input")
       fireEvent.change(inputPasswordUser, { target: { value: inputData.password } })
       expect(inputPasswordUser.value).toBe(inputData.password)
-
+      
       const form = screen.getByTestId("form-admin")
       
       // localStorage should be populated with form data
@@ -212,12 +216,13 @@ describe("Given that I am a user on login page", () => {
             password: inputData.password,
             status: "connected"
           })
-        )
+        ) 
       })  
 
     test("It should renders HR dashboard page", () => {
-      expect(screen.queryByText('Validations')).toBeTruthy()
+     expect(screen.queryByText('Validations')).toBeTruthy()
     })
   
   })
+  
 })

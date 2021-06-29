@@ -17,8 +17,62 @@ export default class NewBill {
   }
   handleChangeFile = e => {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
-    const filePath = e.target.value.split(/\\/g)
+    console.log("file", file.type)
+    const filePath = e.target.value.split(/\\/g);
+    console.log("file path", filePath);
     const fileName = filePath[filePath.length-1]
+    console.log("file Name", fileName);
+    const extension = fileName.split('.').pop();
+    if(file.type !== "application/pdf"){
+      console.log('bingo')
+    }
+
+    /*
+    $http.post('/fetchBlobURL',{myParams}, {responseType: 'arraybuffer'})
+   .success(function (data) {
+       const file = new Blob([data], {type: 'application/pdf'});
+       const fileURL = URL.createObjectURL(file);
+       window.open(fileURL);
+    
+    });
+
+    OU 
+
+    $http({
+      url: "...",
+      method: "POST",
+      responseType: "blob"
+    }).then(function(response) {
+      var fileURL = URL.createObjectURL(response.data);
+      window.open(fileURL);
+    });
+*/
+
+
+    // Bloquer les extensions différentes de JPG/JPEG/PNG
+    function stopWrongExtension (){
+      if(extension !== "jpg"){
+        e.preventDefault();
+        return false
+      } else if(extension !== "JPG"){
+        e.preventDefault();
+        return false
+      }else if(extension !== "jpeg"){
+        e.preventDefault();
+        return false
+      }else if(extension !== "JPEG"){
+        e.preventDefault();
+        return false
+      }else if(extension !== "png"){
+        e.preventDefault();
+        return false
+      }else if(extension !== "PNG"){
+        e.preventDefault();
+        return false
+      }
+    }
+    stopWrongExtension();
+    
     this.firestore
       .storage
       .ref(`justificatifs/${fileName}`)
@@ -29,6 +83,7 @@ export default class NewBill {
         this.fileName = fileName
       })
   }
+
   handleSubmit = e => {
     e.preventDefault()
     console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)

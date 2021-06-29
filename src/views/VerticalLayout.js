@@ -8,6 +8,11 @@ export default (height) => {
     if (typeof user === 'string') {
       user = JSON.parse(user)
     }
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('myCat', 'Tom');
+  }
+
     if (user && user.type === 'Employee') {
       return (
         `
