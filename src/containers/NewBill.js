@@ -3,6 +3,7 @@ import { ROUTES_PATH } from '../constants/routes.js'
 import Logout from "./Logout.js"
 
 export default class NewBill {
+
   constructor({ document, onNavigate, firestore, localStorage }) {
     this.document = document
     this.onNavigate = onNavigate
@@ -15,6 +16,8 @@ export default class NewBill {
     this.fileName = null
     new Logout({ document, localStorage, onNavigate })
   }
+
+  // Fonction à modifier selon consignes
   handleChangeFile = e => {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     console.log("file", file.type)
@@ -27,7 +30,7 @@ export default class NewBill {
       console.log('bingo')
     }
 
-    /*
+  /*
     $http.post('/fetchBlobURL',{myParams}, {responseType: 'arraybuffer'})
    .success(function (data) {
        const file = new Blob([data], {type: 'application/pdf'});
@@ -46,7 +49,7 @@ export default class NewBill {
       var fileURL = URL.createObjectURL(response.data);
       window.open(fileURL);
     });
-*/
+  */
 
 
     // Bloquer les extensions différentes de JPG/JPEG/PNG
@@ -83,6 +86,7 @@ export default class NewBill {
         this.fileName = fileName
       })
   }
+
 
   handleSubmit = e => {
     e.preventDefault()
