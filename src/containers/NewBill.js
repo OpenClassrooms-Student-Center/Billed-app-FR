@@ -19,15 +19,21 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
-    this.firestore
-      .storage
-      .ref(`justificatifs/${fileName}`)
-      .put(file)
-      .then(snapshot => snapshot.ref.getDownloadURL())
-      .then(url => {
-        this.fileUrl = url
-        this.fileName = fileName
-      })
+    const fileExtension = fileName.split('.').pop();
+    if(['PNG', 'JPG', 'JPEG'].includes(fileExtension.toUpperCase())) { 
+      this.firestore
+        .storage
+        .ref(`justificatifs/${fileName}`)
+        .put(file)
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+          this.fileUrl = url
+          this.fileName = fileName
+        })
+    } else {
+        document.querySelector(`input[data-testid="file"]`).value = "";
+        alert('Désolé, ' + file.name + ' est invalide, extensions autorisées jpeg/jpg/png')
+      }
   }
   handleSubmit = e => {
     e.preventDefault()
