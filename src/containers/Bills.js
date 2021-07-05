@@ -41,7 +41,6 @@ export default class {
             try {
               return {
                 ...doc.data(),
-                date: formatDate(doc.data().date),
                 status: formatStatus(doc.data().status)
               }
             } catch(e) {
