@@ -23,12 +23,11 @@ const rows = (data) => {
   if (!(data && data.length)) {
     return ""
   }
-  const orderedBills = [...data];
-  orderedBills.sort(function(a,b){
-    return new Date(b.date) - new Date(a.date);
+  data.sort(function(a,b){
+    return (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
   });
 
-  return orderedBills.map(bill => row(bill)).join("");
+  return data.map(bill => row(bill)).join("");
 }
 
 export default ({ data: bills, loading, error }) => {
