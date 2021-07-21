@@ -51,3 +51,12 @@ $jest src/__tests__/your_test_file.js
 A AJOUTER accept="image/png, image/jpeg, image/jpg"
 
 
+npm test -- --coverage
+
+
+ "test": "jest --coverage --noStackTrace --silent",
+
+
+accept=".jpg, .jpeg, .png"
+
+

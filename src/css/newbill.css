@@ -22,6 +22,14 @@
   border-radius: 5px;
 }
 
+#errorMessage{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: red;
+}
+
 label {
   font-style: normal;
   font-weight: 500;
