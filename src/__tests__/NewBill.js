@@ -29,40 +29,37 @@ describe("Given I am connected as an employee", () => {
 describe("Given I am connected as an employee", () => {
   describe("When I am on NewBill Page", () => {
     test("Then I update the justificatif file", () => {
-  
+
       //const firebase = jest.fn()
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Employee'
       }))
-  
+
       const html = NewBillUI()
       document.body.innerHTML = html
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({ pathname })
       }
-    
-      const firebase = jest.fn()
 
       const firestoreMock = {
         ref: jest.fn().mockReturnThis(),
         doc: jest.fn().mockReturnThis(),
-        put: jest.fn().mockResolvedValueOnce(),
+        put: jest.fn().mockImplementation(() => Promise.resolve({ ref: {getDownloadURL: () => Promise.resolve()} })),
       };
-      
-      //const firestore = null
+
       const firestore = {
         storage : firestoreMock
       }
-      
+
       const newBillFromTest = new NewBill ({
-        document, 
-        onNavigate, 
+        document,
+        onNavigate,
         firestore,
         localStorage: window.localStorage
       })
-     
-      const handleChangeFile = jest.fn(newBillFromTest.handleChangeFile) 
+
+      const handleChangeFile = jest.fn(newBillFromTest.handleChangeFile)
       const changeFileBtn = screen.getByTestId('file')
 
       changeFileBtn.addEventListener('change', handleChangeFile)
@@ -82,9 +79,9 @@ describe("Given I am connected as an employee", () => {
 
 
 describe("Given I am connected as an employee", () => {
-  describe("When I am on NewBill Page and I try to submit a new bill", () => { 
+  describe("When I am on NewBill Page and I try to submit a new bill", () => {
     test("then extension of the justificatif is different of JPG or PNG", () => {
-      
+
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Employee'
@@ -99,23 +96,28 @@ describe("Given I am connected as an employee", () => {
       const firestore = null
 
       const newBillFromTest = new NewBill ({
-        document, 
-        onNavigate, 
+        document,
+        onNavigate,
         firestore,
         localStorage: window.localStorage
       })
-      newBillFromTest.fileType = "Application/pdf"
 
-      const handleSubmitNewBill = jest.fn(newBillFromTest.handleSubmit) 
+      const changeFileBtn = screen.getByTestId('file')
+      fireEvent.change(changeFileBtn, {
+        target: {
+          files: [new File(['chucknorris.pdf'], 'chucknorris.pdf', { type: 'application/pdf' })],
+        },
+      })
+
+      const handleSubmitNewBill = jest.fn(newBillFromTest.handleSubmit)
       const submitBtnNewBill = screen.getByTestId('btn-send-bill')
 
       submitBtnNewBill.addEventListener('submit', handleSubmitNewBill)
-      //userEvent.click(changeFileBtn)
-      //fireEvent.change(changeFileBtn, {
+      fireEvent.submit(submitBtnNewBill)
 
       expect(handleSubmitNewBill).toHaveBeenCalled()
-      expect(screen.getAllByText("Envoyer")).toBeTruthy();
- 
+      expect(screen.getAllByText("Vous devez choisir un fichier en JPEG, JPG, ou PNG.")).toBeTruthy();
+
     })
   })
 })
@@ -124,36 +126,50 @@ describe("Given I am connected as an employee", () => {
 describe("Given I am connected as an employee", () => {
   describe("When I am on NewBill Page and i have just finished to fill the form", () => {
     test("Then all is correct and I submit my new bill", () => {
-      
+
       //jest.mock('./dependecy', () => jest.fn());
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-      
+
       window.localStorage.setItem('user', JSON.stringify({type: 'Employee'}))
 
       const html = NewBillUI()
       document.body.innerHTML = html
 
-      const onNavigate = (pathname) => {
-        document.body.innerHTML = ROUTES({ pathname })
+      const onNavigate = jest.fn((pathname) => {})
+
+
+      const firestoreMock = {
+        ref: jest.fn().mockReturnThis(),
+        doc: jest.fn().mockReturnThis(),
+        put: jest.fn().mockImplementation(() => Promise.resolve({ ref: {getDownloadURL: () => Promise.resolve()} })),
+      };
+
+      const firestore = {
+        storage : firestoreMock
       }
-      
-      const firestore = null
+      const createBill = jest.fn()
       const newBillTest = new NewBill ({
-        document, 
-        onNavigate, 
-        firestore, 
+        document,
+        onNavigate,
+        firestore,
         localStorage: window.localStorage
       })
-      //console.log(newBillTest)
-      const submitButton = screen.getByTestId("btn-send-bill")
+      newBillTest.createBill = createBill;
+      const submitForm = screen.getByTestId("form-new-bill")
       const handleSubmit = jest.fn(newBillTest.handleSubmit)
-      submitButton.addEventListener("submit", handleSubmit)
-      
-      fireEvent.submit(submitButton)
+      submitForm.addEventListener("submit", handleSubmit)
+      const changeFileBtn = screen.getByTestId('file')
+      fireEvent.change(changeFileBtn, {
+        target: {
+          files: [new File(['chucknorris.png'], 'chucknorris.png', { type: 'image/png' })],
+        },
+      })
 
-      expect(handleSubmit).toHaveBeenCalled()
-      //const bigBilledIcon = screen.queryByTestId("big-billed-icon")
-      //expect(bigBilledIcon).toBeTruthy()
+      fireEvent.submit(submitForm)
+
+      expect(handleSubmit).toHaveBeenCalled();
+      expect(createBill).toHaveBeenCalled();
+      expect(onNavigate).toHaveBeenCalledWith('#employee/bills');
     })
   })
 })
@@ -165,7 +181,7 @@ describe("Given I am connected as an employee", () => {
 describe("Given I am a user connected as an Employees", () => {
   describe("When I fill a new bill", () => {
     test("fetches new bill to mock API Post", async () => {
-          
+
       const getSpy = jest.spyOn(firebase, "get")
       const bills = await firebase.get()
        expect(getSpy).toHaveBeenCalledTimes(1)

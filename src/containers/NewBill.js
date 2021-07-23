@@ -33,7 +33,7 @@ export default class NewBill {
       return false
     } 
     
-    /* istanbul ignore next */
+ 
     console.log(this.firestore.storage)
     this.firestore
       .storage
@@ -85,6 +85,7 @@ export default class NewBill {
 
   
   // not need to cover this function by tests
+   /* istanbul ignore next */
   createBill = (bill) => {
     if (this.firestore) {
       this.firestore
