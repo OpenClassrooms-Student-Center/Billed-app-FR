@@ -29,8 +29,6 @@ describe("Given I am connected as an employee", () => {
 describe("Given I am connected as an employee", () => {
   describe("When I am on NewBill Page", () => {
     test("Then I update the justificatif file", () => {
-
-      //const firebase = jest.fn()
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Employee'
@@ -63,8 +61,6 @@ describe("Given I am connected as an employee", () => {
       const changeFileBtn = screen.getByTestId('file')
 
       changeFileBtn.addEventListener('change', handleChangeFile)
-      //userEvent.click(changeFileBtn)
-      //fireEvent.change(changeFileBtn, {
       fireEvent.change(changeFileBtn, {
         target: {
           files: [new File(['chucknorris.png'], 'chucknorris.png', { type: 'image/png' })],
@@ -81,7 +77,6 @@ describe("Given I am connected as an employee", () => {
 describe("Given I am connected as an employee", () => {
   describe("When I am on NewBill Page and I try to submit a new bill", () => {
     test("then extension of the justificatif is different of JPG or PNG", () => {
-
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Employee'
@@ -127,7 +122,6 @@ describe("Given I am connected as an employee", () => {
   describe("When I am on NewBill Page and i have just finished to fill the form", () => {
     test("Then all is correct and I submit my new bill", () => {
 
-      //jest.mock('./dependecy', () => jest.fn());
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
 
       window.localStorage.setItem('user', JSON.stringify({type: 'Employee'}))
@@ -136,8 +130,6 @@ describe("Given I am connected as an employee", () => {
       document.body.innerHTML = html
 
       const onNavigate = jest.fn((pathname) => {})
-
-
       const firestoreMock = {
         ref: jest.fn().mockReturnThis(),
         doc: jest.fn().mockReturnThis(),
