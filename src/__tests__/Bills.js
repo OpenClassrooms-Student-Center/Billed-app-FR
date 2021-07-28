@@ -102,13 +102,10 @@ describe('When I am on Bills page and I on the button new Bill', () => {
 
 describe('Given I am connected  on bills page as an employees', () => {
   test('Then, I can click on all eyeIcon', () => {
-    const url = '/fake_url'
     const html = BillsUI({data: bills})
     document.body.innerHTML = html
 
-    const onNavigate = (pathname) => {
-      //document.body.innerHTML = ROUTES({ pathname })
-    }
+    const onNavigate = (pathname) => {}
     const firestore = null
 
     Object.defineProperty(window, 'localStorage', { value: localStorageMock })
@@ -121,20 +118,35 @@ describe('Given I am connected  on bills page as an employees', () => {
       document, onNavigate, firestore, bills, localStorage: window.localStorage
     })
 
-    const handleClickIconEye = jest.fn() 
-    bill.handleClickIconEye = handleClickIconEye  
+    const handleClickIconEye = jest.fn()
+    bill.handleClickIconEye = handleClickIconEye
 
-    /*
-    iconEye.addEventListener('click', handleClickIconEye)
-    userEvent.click(iconEye)
-    */
     const iconEye = screen.getAllByTestId("icon-eye")[0]
     fireEvent.click(iconEye)
 
     expect(handleClickIconEye).toHaveBeenCalled()
   })
-})
 
+  test('Then, handleClickIconEye cannot be called when there is not bill', () => {
+    const html = BillsUI({data: []})
+    document.body.innerHTML = html
+
+    const onNavigate = (pathname) => {}
+    const firestore = null
+
+    Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+    window.localStorage.setItem('user', JSON.stringify({
+      type: 'Employee'
+    }))
+    $.fn.modal = jest.fn();
+
+    new Bills({
+      document, onNavigate, firestore, bills, localStorage: window.localStorage
+    })
+
+    expect(screen.queryAllByTestId("icon-eye")).toEqual([])
+  })
+})
 
 
 
