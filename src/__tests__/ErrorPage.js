@@ -2,7 +2,7 @@ import { screen } from "@testing-library/dom"
 import ErrorPage from "../views/ErrorPage.js"
 
 describe('Given I am connected on app (as an Employee or an HR admin)', () => {
-  describe('When ErrorPage is called without and error in its signature', () => {
+  describe('When ErrorPage is called without error in its signature', () => {
     test(('Then, it should render ErrorPage with no error message'), () => {
       const html = ErrorPage()
       document.body.innerHTML = html
