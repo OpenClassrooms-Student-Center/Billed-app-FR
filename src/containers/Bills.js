@@ -40,6 +40,7 @@ export default class {
           .map(doc => {
             try {
               return {
+                // TODO HERE IS A PROBLEM 
                 ...doc.data(),
                 date: formatDate(doc.data().date),
                 status: formatStatus(doc.data().status)
