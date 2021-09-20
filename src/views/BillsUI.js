@@ -24,9 +24,9 @@ const rows = (data) => {
 // TODO [Bug report]#1
   let debbuged
   if (data && data.length) {
-     result = data.map(bill => row(bill)).join("")
-     const antiChrono = (a, b) => ((a < b) ? 1 : -1)
-     debbuged = [...result].sort(antiChrono)
+    debbuged = data.map(bill => row(bill)).join("")
+  //   const antiChrono = (a, b) => ((a < b) ? 1 : -1)
+  //   debbuged = [...result].sort(antiChrono)
    return debbuged
    } 
  }
