@@ -21,7 +21,7 @@ const row = (bill) => {
 
 const rows = (data) => {
 /* error = return (data && data.length) ? data.map(bill => row(bill)).join("") : "" } */
-// TODO [Bug report]#1
+// TODO BUG#1 [Bug report]
   let debbuged
   if (data && data.length) {
     debbuged = data.map(bill => row(bill)).join("")
