@@ -20,8 +20,16 @@ const row = (bill) => {
   }
 
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
-}
+/* error = return (data && data.length) ? data.map(bill => row(bill)).join("") : "" } */
+// TODO [Bug report]#1
+  let debbuged
+  if (data && data.length) {
+     result = data.map(bill => row(bill)).join("")
+     const antiChrono = (a, b) => ((a < b) ? 1 : -1)
+     debbuged = [...result].sort(antiChrono)
+   return debbuged
+   } 
+ }
 
 export default ({ data: bills, loading, error }) => {
   
