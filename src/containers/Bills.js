@@ -43,6 +43,7 @@ export default class {
                 // TODO HERE IS A PROBLEM 
                 ...doc.data(),
                 date: formatDate(doc.data().date),
+              //  date: new Date(doc.data().date),
                 status: formatStatus(doc.data().status)
               }
             } catch(e) {

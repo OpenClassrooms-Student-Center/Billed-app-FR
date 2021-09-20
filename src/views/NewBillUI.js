@@ -55,7 +55,8 @@ export default () => {
                   </div>
                   <div class="col-half">
                     <label for="file" class="bold-label">Justificatif</label>
-                    <input required type="file" class="form-control blue-border" data-testid="file" />
+                    <!-- TODO BUG#3 [Bug Hunt] - Bills -->
+                    <input required type="file" accept=".jpg, .png, .jpeg" class="form-control blue-border" data-testid="file" />
                   </div>
                 </div>
             </div>
