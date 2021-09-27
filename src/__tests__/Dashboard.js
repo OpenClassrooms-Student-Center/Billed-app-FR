@@ -233,3 +233,11 @@ describe("Given I am a user connected as Admin", () => {
   })
 })
 
+
+describe("Given I'm a connected", () => {
+  describe("When I log and a there is a waiting time" , () => {
+    it("Should start a loading", () => {
+      
+    })
+  })
+})

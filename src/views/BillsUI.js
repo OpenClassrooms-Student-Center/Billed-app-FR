@@ -20,17 +20,21 @@ const row = (bill) => {
   }
 
 const rows = (data) => {
-/* error = return (data && data.length) ? data.map(bill => row(bill)).join("") : "" } */
-// TODO BUG#1 [Bug report]
-console.log(data)
-  let debbuged
+// FIXED BUG#1 [Bug report] TRIER PAR ORDRE DECROISSANT
   if (data && data.length) {
-    debbuged = data.map(bill => row(bill)).join("")
-  //   const antiChrono = (a, b) => ((a < b) ? 1 : -1)
-  //   debbuged = [...result].sort(antiChrono)
-   return debbuged
-   } 
- }
+    function compare( a, b ) {
+      if ( a.dateObj < b.dateObj ){
+        return -1;
+      }
+      if ( a.dateObj > b.dateObj ){
+        return 1;
+      }
+      return 0;
+    }
+    data.sort(compare)
+    return data.map(bill => row(bill)).join("")
+  }
+} 
 
 export default ({ data: bills, loading, error }) => {
   
