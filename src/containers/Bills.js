@@ -40,10 +40,9 @@ export default class {
           .map(doc => {
             try {
               return {
-                // TODO HERE IS A PROBLEM 
+                // TODO sort
                 ...doc.data(),
-                date: formatDate(doc.data().date),
-              //  date: new Date(doc.data().date),
+                ...formatDate(doc.data().date),
                 status: formatStatus(doc.data().status)
               }
             } catch(e) {

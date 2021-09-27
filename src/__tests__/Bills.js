@@ -19,3 +19,7 @@ describe("Given I am connected as an employee", () => {
     })
   })
 })
+
+describe("Given I am connected", () => {
+  describe("")
+})

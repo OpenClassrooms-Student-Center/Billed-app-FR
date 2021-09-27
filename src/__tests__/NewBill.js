@@ -11,4 +11,10 @@ describe("Given I am connected as an employee", () => {
       //to-do write assertion
     })
   })
+
+  describe("When I submit a NewBill", () => {
+    test("Then it should submit my email", () => {
+      const email 
+    })
+  })
 })
