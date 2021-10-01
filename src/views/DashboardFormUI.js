@@ -21,6 +21,9 @@ export const modal = () => (`
   </div>
   `)
 
+/**
+ * rh edit opened bill display 
+ */
 export default (bill) => {
 
   return (`
@@ -33,7 +36,7 @@ export default (bill) => {
           <div class='input-field'> ${bill.name} </div>
           <label for="datepicker" class="bold-label">Date</label>
           <div class='input-field input-flex'>
-            <span>${formatDate(bill.date)}</span>
+            <span>${bill.date}</span>
             <span> ${calendarIcon} </span>
           </div>
         </div>
