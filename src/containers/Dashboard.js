@@ -26,6 +26,11 @@ export const filteredBills = (data, status) => {
     }) : []
 }
 
+/**
+ * Admin dashboard card bill
+ * @param {*} bill 
+ * @returns 
+ */
 export const card = (bill) => {
   const firstAndLastNames = bill.email.split('@')[0]
   const firstName = firstAndLastNames.includes('.') ?
@@ -44,7 +49,7 @@ export const card = (bill) => {
         <span> ${bill.amount} € </span>
       </div>
       <div class='date-type-container'>
-        <span> ${formatDate(bill.date)} </span>
+        <span> ${bill.date} </span>
         <span> ${bill.type} </span>
       </div>
     </div>
