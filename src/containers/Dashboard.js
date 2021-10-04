@@ -109,20 +109,17 @@ export default class {
   handleEditTicket(e, bill, bills) {
     if (this.counter === undefined || this.id !== bill.id) this.counter = 0 
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id
-  //  if (this.counter % 2 === 0) {
-    if (true) {
+  //  if (this.counter % 2 === 0) { USELESS ?
+    if (true) { // FIX [Bug Hunt] - Dashboard
       bills.forEach(b => {
         $(`#open-bill${b.id}`).css({ background: '#0D5AE5' })
       })
       $(`#open-bill${bill.id}`).css({ background: '#2A2B35' })
-      console.log(DashboardFormUI(bill))
       $('.dashboard-right-container div').html(DashboardFormUI(bill))
       $('.vertical-navbar').css({ height: '150vh' })
       this.counter ++
     } else {
       $(`#open-bill${bill.id}`).css({ background: '#0D5AE5' })
-      console.log('remove content')
-
       $('.dashboard-right-container div').html(`
         <div id="big-billed-icon"> ${BigBilledIcon} </div>
       `)
