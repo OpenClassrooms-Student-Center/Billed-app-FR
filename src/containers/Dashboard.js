@@ -5,6 +5,13 @@ import { ROUTES_PATH } from '../constants/routes.js'
 import USERS_TEST from '../constants/usersTest.js'
 import Logout from "./Logout.js"
 
+/**
+ * Filter bills when adminRh log-ining + when adminRH open dropdown of bills attente/validé/refusé
+ * Filter bills when employee log-ining 
+ * @param {*} data 
+ * @param {*} status 
+ * @returns 
+ */
 export const filteredBills = (data, status) => {
   return (data && data.length) ?
     data.filter(bill => {
@@ -27,7 +34,7 @@ export const filteredBills = (data, status) => {
 }
 
 /**
- * Admin dashboard card bill
+ * Admin dashboard card bill when open dropdown validé/attente/refusés
  * @param {*} bill 
  * @returns 
  */
@@ -56,10 +63,19 @@ export const card = (bill) => {
   `)
 }
 
+/**
+ * When adminRh open dropdown validé/attente/refusé return card bills
+ * @param {*} bills 
+ * @returns 
+ */
 export const cards = (bills) => {
   return bills && bills.length ? bills.map(bill => card(bill)).join("") : ""
 }
-
+/**
+ * When adminRh open dropdown validé/attente/refusé
+ * @param {*} index 
+ * @returns 
+ */
 export const getStatus = (index) => {
   switch (index) {
     case 1:
@@ -91,18 +107,21 @@ export default class {
   }
 
   handleEditTicket(e, bill, bills) {
-    if (this.counter === undefined || this.id !== bill.id) this.counter = 0
+    if (this.counter === undefined || this.id !== bill.id) this.counter = 0 
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id
-    if (this.counter % 2 === 0) {
+  //  if (this.counter % 2 === 0) {
+    if (true) {
       bills.forEach(b => {
         $(`#open-bill${b.id}`).css({ background: '#0D5AE5' })
       })
       $(`#open-bill${bill.id}`).css({ background: '#2A2B35' })
+      console.log(DashboardFormUI(bill))
       $('.dashboard-right-container div').html(DashboardFormUI(bill))
       $('.vertical-navbar').css({ height: '150vh' })
       this.counter ++
     } else {
       $(`#open-bill${bill.id}`).css({ background: '#0D5AE5' })
+      console.log('remove content')
 
       $('.dashboard-right-container div').html(`
         <div id="big-billed-icon"> ${BigBilledIcon} </div>
