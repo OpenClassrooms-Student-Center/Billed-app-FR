@@ -8,19 +8,31 @@ export default class {
     this.onNavigate = onNavigate
     this.firestore = firestore
     const buttonNewBill = document.querySelector(`button[data-testid="btn-new-bill"]`)
+    // employee nouvelle note de frais button
     if (buttonNewBill) buttonNewBill.addEventListener('click', this.handleClickNewBill)
     const iconEye = document.querySelectorAll(`div[data-testid="icon-eye"]`)
+    // employee icon eyes
     if (iconEye) iconEye.forEach(icon => {
       icon.addEventListener('click', (e) => this.handleClickIconEye(icon))
     })
     new Logout({ document, localStorage, onNavigate })
   }
 
+  /**
+   * Employee New bill button
+   * @param {*} e 
+   */
   handleClickNewBill = e => {
     this.onNavigate(ROUTES_PATH['NewBill'])
   }
 
+  /**
+   * Employee eye icon check bills button
+   * @param {*} icon 
+   */
   handleClickIconEye = (icon) => {
+    console.log(icon)
+    // TODO data-bill-url null for gif #[Bug Hunt] - Bills
     const billUrl = icon.getAttribute("data-bill-url")
     const imgWidth = Math.floor($('#modaleFile').width() * 0.5)
     $('#modaleFile').find(".modal-body").html(`<div style='text-align: center;'><img width=${imgWidth} src=${billUrl} /></div>`)
@@ -28,6 +40,9 @@ export default class {
   }
 
   // not need to cover this function by tests
+  /**
+   * Employee at login loading bills
+   */
   getBills = () => {
     const userEmail = localStorage.getItem('user') ?
       JSON.parse(localStorage.getItem('user')).email : ""
@@ -36,11 +51,11 @@ export default class {
       .bills()
       .get()
       .then(snapshot => {
+        console.log(snapshot.docs)
         const bills = snapshot.docs
           .map(doc => {
             try {
               return {
-                // TODO sort
                 ...doc.data(),
                 ...formatDate(doc.data().date),
                 status: formatStatus(doc.data().status)

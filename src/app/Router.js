@@ -21,15 +21,20 @@ export default () => {
       window.location.origin + pathname
     )
     if (pathname === ROUTES_PATH['Login']) {
+      // LOGOUT
       rootDiv.innerHTML = ROUTES({ pathname })
       document.body.style.backgroundColor="#0E5AE5"
       new Login({ document, localStorage, onNavigate, PREVIOUS_LOCATION, firestore })
     } else if (pathname === ROUTES_PATH['Bills']) {
+      // employee : login, submit a bill
       rootDiv.innerHTML = ROUTES({ pathname, loading: true })
       const divIcon1 = document.getElementById('layout-icon1')
       const divIcon2 = document.getElementById('layout-icon2')
       divIcon1.classList.add('active-icon')
       divIcon2.classList.remove('active-icon')
+      // Here are create bills
+      console.log(onNavigate)
+      console.log(firestore)
       const bills = new Bills({ document, onNavigate, firestore, localStorage  })
       bills.getBills().then(data => {
         rootDiv.innerHTML = BillsUI({ data })
@@ -42,6 +47,7 @@ export default () => {
         rootDiv.innerHTML = ROUTES({ pathname, error })
       })
     } else if (pathname === ROUTES_PATH['NewBill']) {
+      // employee : "nouvelle note de frais" button
       rootDiv.innerHTML = ROUTES({ pathname, loading: true })
       new NewBill({ document, onNavigate, firestore, localStorage })
       const divIcon1 = document.getElementById('layout-icon1')
@@ -49,6 +55,7 @@ export default () => {
       divIcon1.classList.remove('active-icon')
       divIcon2.classList.add('active-icon')
     } else if (pathname === ROUTES_PATH['Dashboard']) {
+      // AdminRH : log-ining + accept/refuse bill
       rootDiv.innerHTML = ROUTES({ pathname, loading: true })
       const bills = new Dashboard({ document, onNavigate, firestore, bills: [], localStorage })
       bills.getBillsAllUsers().then(bills => {
@@ -76,6 +83,7 @@ export default () => {
     document.body.style.backgroundColor="#0E5AE5"
   } else if (window.location.hash !== "") {
     if (window.location.hash === ROUTES_PATH['Bills']) {
+      // 
       rootDiv.innerHTML = ROUTES({ pathname: window.location.hash, loading: true })
       const divIcon1 = document.getElementById('layout-icon1')
       const divIcon2 = document.getElementById('layout-icon2')
@@ -93,6 +101,7 @@ export default () => {
         rootDiv.innerHTML = ROUTES({ pathname: window.location.hash, error })
       })
     } else if (window.location.hash === ROUTES_PATH['NewBill']) {
+      //
       rootDiv.innerHTML = ROUTES({ pathname: window.location.hash, loading: true })
       new NewBill({ document, onNavigate, firestore, localStorage })
       const divIcon1 = document.getElementById('layout-icon1')

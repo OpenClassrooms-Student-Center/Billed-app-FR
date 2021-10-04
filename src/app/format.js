@@ -7,6 +7,7 @@ export const formatDate = (dateStr) => {
   }
 }
  
+// main display employee 
 export const formatStatus = (status) => {
   switch (status) {
     case "pending":

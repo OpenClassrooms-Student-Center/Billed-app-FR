@@ -7,6 +7,8 @@ export default class NewBill {
     this.document = document
     this.onNavigate = onNavigate
     this.firestore = firestore
+    // binded localStorage
+    this.localStorage = localStorage
     const formNewBill = this.document.querySelector(`form[data-testid="form-new-bill"]`)
     formNewBill.addEventListener("submit", this.handleSubmit)
     const file = this.document.querySelector(`input[data-testid="file"]`)
@@ -16,20 +18,21 @@ export default class NewBill {
     new Logout({ document, localStorage, onNavigate })
   }
   handleChangeFile = e => {
-    // TODO BUG#3 [Bug Hunt] - Bills
-    const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
-    const filePath = e.target.value.split(/\\/g)
-    // TODO BUG#3 NAME
-    const fileName = filePath[filePath.length-1]
-    this.firestore
-      .storage
-      .ref(`justificatifs/${fileName}`)
-      .put(file)
-      .then(snapshot => snapshot.ref.getDownloadURL())
-      .then(url => {
-        this.fileUrl = url
-        this.fileName = fileName
-      })
+    // IN the form when create a new bill by employee
+      // TODO [Bug Hunt] - Bills
+      const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
+      const filePath = e.target.value.split(/\\/g)
+      const fileName = filePath[filePath.length-1]
+      console.log(fileName)
+      this.firestore
+        .storage
+        .ref(`justificatifs/${fileName}`)
+        .put(file)
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+          this.fileUrl = url
+          this.fileName = fileName
+        })
   }
   handleSubmit = e => {
     e.preventDefault()

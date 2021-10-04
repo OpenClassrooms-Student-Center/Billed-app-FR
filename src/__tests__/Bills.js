@@ -7,7 +7,7 @@ describe("Given I am connected as an employee", () => {
     test("Then bill icon in vertical layout should be highlighted", () => {
       const html = BillsUI({ data: []})
       document.body.innerHTML = html
-      //to-do write expect expression
+      expect($(#layout-icon1).hasClass(active-icon));
     })
     test("Then bills should be ordered from earliest to latest", () => {
       const html = BillsUI({ data: bills })

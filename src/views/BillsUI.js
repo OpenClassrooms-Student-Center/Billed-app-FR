@@ -20,6 +20,8 @@ const row = (bill) => {
   }
 
 const rows = (data) => {
+  // BUG [Bug Hunt] - Bills déjà là ​
+fileUrl: null
 // FIXED BUG#1 [Bug report] TRIER PAR ORDRE DECROISSANT
   if (data && data.length) {
     function compare( a, b ) {

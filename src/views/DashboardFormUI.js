@@ -22,7 +22,7 @@ export const modal = () => (`
   `)
 
 /**
- * rh edit opened bill display 
+ * rh edit bill (opened) display 
  */
 export default (bill) => {
 
