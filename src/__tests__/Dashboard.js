@@ -235,7 +235,7 @@ describe("Given I am a user connected as Admin", () => {
 
 // test d'intégration POST
  describe("Given I am a user connected as Employe", () => {
-   describe("When I navigate to Dashboard", () => {
+   describe("When I navigate to Bills", () => {
      test("fetches bills from mock API GET", async () => {
         const getSpy = jest.spyOn(firebase, "get")
         const bills = await firebase.get()
