@@ -33,12 +33,14 @@ export default () => {
       divIcon1.classList.add('active-icon')
       divIcon2.classList.remove('active-icon')
       // Here are create bills
-      // TODO BUG HUNT BILL
+      // TODO BUG HUNT - BILL
       console.log('OnNavigate puis firestore')
       console.log(onNavigate)
       console.log(firestore)
       const bills = new Bills({ document, onNavigate, firestore, localStorage  })
       bills.getBills().then(data => {
+        // TODO BUG HUNT BILL
+        // Bills get data from here : document, onNavigate, firestore, localStorage
         rootDiv.innerHTML = BillsUI({ data })
         const divIcon1 = document.getElementById('layout-icon1')
         const divIcon2 = document.getElementById('layout-icon2')
