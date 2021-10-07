@@ -33,6 +33,8 @@ export default () => {
       divIcon1.classList.add('active-icon')
       divIcon2.classList.remove('active-icon')
       // Here are create bills
+      // TODO BUG HUNT BILL
+      console.log('OnNavigate puis firestore')
       console.log(onNavigate)
       console.log(firestore)
       const bills = new Bills({ document, onNavigate, firestore, localStorage  })
@@ -109,6 +111,7 @@ export default () => {
       divIcon1.classList.remove('active-icon')
       divIcon2.classList.add('active-icon')
     } else if (window.location.hash === ROUTES_PATH['Dashboard']) {
+      //
       rootDiv.innerHTML = ROUTES({ pathname: window.location.hash, loading: true })
       const bills = new Dashboard({ document, onNavigate, firestore, bills: [], localStorage })
       bills.getBillsAllUsers().then(bills => {
