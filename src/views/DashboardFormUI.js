@@ -25,7 +25,7 @@ export const modal = () => (`
  * rh edit bill (opened) display 
  */
 export default (bill) => {
-
+console.log(bill)
   return (`
     <div class="container dashboard-form" data-testid="dashboard-form">
       <div class="row">

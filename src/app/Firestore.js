@@ -1,4 +1,5 @@
 class Firestore {
+  // TODO [Bug Hunt] - Le bug doit être là quelque part
   constructor() {
     this.store = window.firebase ? window.firebase.firestore() : () => null
     this.storage = window.firebase ? window.firebase.storage() : () => null
