@@ -18,22 +18,61 @@ export default class NewBill {
     new Logout({ document, localStorage, onNavigate })
   }
   handleChangeFile = e => {
-    // IN the form when create a new bill by employee
-      // TODO [Bug Hunt] - Bills
+    // TODO [Bug Hunt] - Bills : fileName should be only jpg jpeg or png
+    // split pour check extension
       const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
-      const filePath = e.target.value.split(/\\/g)
-      const fileName = filePath[filePath.length-1]
-      console.log(fileName)
-      this.firestore
-        .storage
-        .ref(`justificatifs/${fileName}`)
-        .put(file)
-        .then(snapshot => snapshot.ref.getDownloadURL())
-        .then(url => {
-          this.fileUrl = url
-          this.fileName = fileName
-        })
-  }
+      const fileExtension = file.name.split('.').pop();
+      const acceptedExtensionsRegex = /(png|jpg|jpeg)/g;
+      if (fileExtension.match(acceptedExtensionsRegex)) {
+        const filePath = e.target.value.split(/\\/g)
+        const fileName = filePath[filePath.length-1]
+        this.firestore
+          .storage
+          .ref(`justificatifs/${fileName}`)
+          .put(file)
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(url => {
+            this.fileUrl = url
+            this.fileName = fileName
+          })
+      } else {
+        document.querySelector(`input[data-testid='file']`).value = null;
+        alert('Votre fichier doit être un png, jpg ou jpeg.')
+      }
+
+    /*
+    handleChangeFile = (e) => {
+        const file = this.document.querySelector(`input[data-testid='file']`).files[0];
+        const extensionCheck = /(png|jpg|jpeg)/g;
+        const extension = file.name.split('.').pop();
+
+        if (extension.toLowerCase().match(extensionCheck)) {
+          document.getElementById('errorFileType').classList.add('hideErrorMessage');
+          const filePath = e.target.value.split(/\\/g);
+          const fileName = filePath[filePath.length - 1];
+
+          this.firestore
+            .storage
+            .ref(`justificatifs/${fileName}`)
+            .put(file)
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then(url => {
+              this.fileUrl = url
+              this.fileName = fileName
+            });
+
+
+        } else {
+          document.getElementById('errorFileType').classList.remove('hideErrorMessage');
+          this.document.querySelector(`input[data-testid='file']`).value = null;
+        };
+    */
+}
+
+
+
+
+
   handleSubmit = e => {
     e.preventDefault()
     console.log(e.target.querySelector(`input[data-testid="datepicker"]`).value, e.target.querySelector(`input[data-testid="datepicker"]`).value)
