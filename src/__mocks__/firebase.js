@@ -1,3 +1,4 @@
+// Need to import himself so line 70 can get()
 import firebase from "./firebase"
 
 export default {
