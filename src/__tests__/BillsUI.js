@@ -2,13 +2,17 @@ import { screen } from "@testing-library/dom"
 import BillsUi from "../views/BillsUI"
 import LoadingPage from "../views/LoadingPage.js"
 import ErrorPage from "../views/ErrorPage.js"
+import ROUTES from '../constants/routes.js'
 
 // TEST composant views/Bills : loading function
 describe('Given I just logged in as Employee', () => {
     describe('When the page is loading', () => {
-        it('Should display a loading circle', () => {
-
-            expect().toHaveBeenCalled()
+        it('Should display call the loading page', () => {
+        const rootDiv = document.getElementById('root')
+        const pathname = 'Bills'
+        rootDiv.innerHTML = ROUTES({ pathname: window.location.pathname })
+        const html = BillsUi(true)
+        rootDiv.innerHTML = ROUTES({ pathname, loading: true })
         })
     })
     describe('When the server return an error', () => {
