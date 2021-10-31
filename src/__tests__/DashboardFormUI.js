@@ -33,6 +33,7 @@ const billrefused = {
   "status": "refused"
 }
 
+// TODO débugger
 describe('Given I am connected as an Admin and I am on Dashboard Page', () => {
   describe('When bill data is passed to DashboardUI', () => {
     test(('Then, it should them in the page'), () => {

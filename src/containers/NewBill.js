@@ -18,7 +18,7 @@ export default class NewBill {
     new Logout({ document, localStorage, onNavigate })
   }
   handleChangeFile = e => {
-    // TODO [Bug Hunt] - Bills : fileName should be only jpg jpeg or png
+    // FIXED : [Bug Hunt] - Bills : fileName should be only jpg jpeg or png
     // split pour check extension
       const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
       const fileExtension = file.name.split('.').pop();

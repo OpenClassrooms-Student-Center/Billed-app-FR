@@ -1,6 +1,5 @@
 import firebase from "../__mocks__/firebase"
 
-// TODO WIP
 // test d'intégration POST
 describe("Given I am connected as an employee", () => {
   describe("When I am on NewBill Page and I click on 'Nouvelle note de frais'", () => {
