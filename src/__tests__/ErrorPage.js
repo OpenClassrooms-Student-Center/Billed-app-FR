@@ -10,7 +10,6 @@ describe('Given I am connected on app (as an Employee or an HR admin)', () => {
       expect(screen.getByTestId('error-message').innerHTML.trim().length).toBe(0)
     })
   })
-  // TODO vérifier si c'est un doublon avec Sandrine
   describe('When ErrorPage is called with error message in its signature', () => {
     test(('Then, it should render ErrorPage with its error message'), () => {
       const error = 'Erreur de connexion internet'

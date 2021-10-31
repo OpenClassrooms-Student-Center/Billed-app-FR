@@ -2,12 +2,27 @@ import { screen } from "@testing-library/dom"
 import BillsUI from "../views/BillsUI.js"
 import { bills } from "../fixtures/bills.js"
 import firebase from "../__mocks__/firebase"
+import Firestore from "../app/Firestore"
+import localStorageMock from "../__mocks__/localStorage"
+import { Router } from "../app/Router";
 
 describe("Given I am connected as an employee", () => {
   describe("When I am on Bills Page", () => {
     test("Then bill icon in vertical layout should be highlighted", () => {
-      // TODO
+      // https://jestjs.io/fr/docs/mock-function-api jest.fn()
+      Firestore.bills = () => ({bills, get: jest.fn().mockResolvedValue()})
+      Object.defineProperty(window, 'localStorage', {value: localStorageMock})
+      window.localStorage.setItem('user', JSON.stringify({
+        type: 'Employee'
+      }))
+      const pathname = ROUTES_PATH['Bills']
+      Object.defineProperty(window, "location", {value: {hash: pathname}})
+      document.body.innerHTML = '<div id=root></div>'
+      Router()
+      const iconWindow = screen.getByTestId('icon-window')
+      expect(iconWindow.classList.contains('active-icon')).toBeTruthy()
     })
+
     test("Then bills should be ordered from earliest to latest", () => {
       const html = BillsUI({ data: bills })
       document.body.innerHTML = html
@@ -17,6 +32,7 @@ describe("Given I am connected as an employee", () => {
       expect(dates).toEqual(datesSorted)
     })
   })
+
   describe('When I am on Bills page during a loading', () => {
     test('Then it should display a loading page', () => {
       const html = BillsUI({ loading: true })
@@ -52,7 +68,7 @@ describe("Given I am connected as an employee", () => {
     })
   })
 
-  // GET TODO commenter et comprendre
+  // GET TODO commenter 
   describe("When I navigate to Bills Page", () => {
     test("fetches bills from mock API GET", async () => {
       const getSpy = jest.spyOn(firebase, "get")       
