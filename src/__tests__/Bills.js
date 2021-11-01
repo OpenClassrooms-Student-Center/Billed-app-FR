@@ -19,8 +19,8 @@ describe("Given I am connected as an employee", () => {
       Object.defineProperty(window, "location", {value: {hash: pathname}})
       document.body.innerHTML = '<div id=root></div>'
       Router()
-      const iconWindow = screen.getByTestId('icon-window')
-      expect(iconWindow.classList.contains('active-icon')).toBeTruthy()
+      const icon = screen.getByTestId('icon-window')
+      expect(icon.classList.contains('active-icon')).toBeTruthy()
     })
 
     test("Then bills should be ordered from earliest to latest", () => {
@@ -33,8 +33,8 @@ describe("Given I am connected as an employee", () => {
     })
   })
 
-  describe('When I am on Bills page during a loading', () => {
-    test('Then it should display a loading page', () => {
+  describe('When the page is loading', () => {
+    test('Then it should display a loading', () => {
       const html = BillsUI({ loading: true })
       document.body.innerHTML = html
       expect(screen.getAllByText('Loading...')).toBeTruthy()
@@ -42,7 +42,7 @@ describe("Given I am connected as an employee", () => {
   })
   describe('When the server return an error', () => {
     test('Then it should display an error message', () => {
-      const html = BillsUI({ error: 'some error message' })
+      const html = BillsUI({ error: 'Unexpected error' })
       document.body.innerHTML = html
       expect(screen.getAllByText('Erreur')).toBeTruthy()
     })  
@@ -58,13 +58,51 @@ describe("Given I am connected as an employee", () => {
 
   describe('When I am on bills page and I click on the button "nouvelle note de frais"', () => {
     test('Then it should display the page New Bill', () => {
-      // TODO
+      Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+      window.localStorage.setItem('user', JSON.stringify({
+        type: 'Employee'
+      }))
+      const html = BillsUI({ data:[]})
+      document.body.innerHTML = html
+      const onNavigate = (pathname) => {
+        document.body.innerHTML = ROUTES({ pathname })
+      }
+      const bills = new Bills({
+        document, onNavigate, firestore:null, localStorage: window.localStorage
+      })
+      // TODO jest.fn(bills.handleClickNewBill)
+      const handleClickNewBill = jest.fn(bills.handleClickNewBill)
+      const buttonNewBill = screen.getByTestId('btn-new-bill')
+      expect(buttonNewBill).toBeTruthy()
+      buttonNewBill.addEventListener('click', handleClickNewBill)
+      fireEvent.click(buttonNewBill)
+      expect(screen.getByText('Envoyer une note de frais')).toBeTruthy() 
     })
   })
 
   describe('When I click on the eye icon', () => {
     test('Then it should open a modal', () => {
-      // TODO
+      Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+      window.localStorage.setItem('user', JSON.stringify({
+        type: 'Employee'
+      }))
+      const html = BillsUI({ data: bills })
+      document.body.innerHTML = html
+      const onNavigate = (pathname) => {
+        document.body.innerHTML = ROUTES({ pathname })
+      } 
+      // TODO $.fn.modal ?? c'est quoi ca
+      $.fn.modal = jest.fn()
+      const bills = new Bills({
+        document, onNavigate, firestore: null, localStorage: window.localStorage
+      })     
+      const eye = screen.getAllByTestId('icon-eye')[0]
+      const handleClickIconEye = jest.fn(bills.handleClickIconEye(eye))      
+      eye.addEventListener('click', handleClickIconEye)
+      // TODO fireEvent
+      fireEvent.click(eye)
+      expect(handleClickIconEye).toHaveBeenCalled()
+      expect(screen.getByTestId('modaleFile')).toBeTruthy()         
     })
   })
 
@@ -95,6 +133,5 @@ describe("Given I am connected as an employee", () => {
       expect(message).toBeTruthy()
     })
   })  
-
 })
 
