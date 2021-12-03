@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "dev": "live-server",
     "test": "jest --coverage --noStackTrace --silent"
   },
   "jest": {
@@ -29,6 +30,7 @@
     "@testing-library/user-event": "^12.0.11",
     "babel-jest": "^26.1.0",
     "jest": "^26.1.0",
-    "jest-html-reporter": "^3.1.3"
+    "jest-html-reporter": "^3.1.3",
+    "live-server": "^1.2.1"
   }
 }
