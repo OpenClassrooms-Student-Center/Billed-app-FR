@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "live-server",
+    "dev": "live-server --no-browser --ignore=.git,node_modules ./",
     "test": "jest --coverage --noStackTrace --silent"
   },
   "jest": {
