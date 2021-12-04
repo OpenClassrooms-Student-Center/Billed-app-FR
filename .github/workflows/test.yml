@@ -1,0 +1,15 @@
+name: test
+
+on: pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: 17.2.0-alpine3.14
+    steps:
+      - uses: actions/checkout@v2
+      - name: npm install
+        run: npm install
+      - name: npm test
+        run: npm test
