@@ -7,7 +7,7 @@
   position: absolute;
   left: 530px;
   top: 50px;
-  border: 2px solid #F3F5FA;
+  border: 2px solid #f3f5fa;
   box-sizing: border-box;
   border-radius: 10px;
   padding: 23px;
@@ -51,7 +51,7 @@
 .bill-card {
   margin-top: 17px;
   margin-bottom: 17px;
-  background: #0D5AE5;
+  background: #0d5ae5;
   border-radius: 8px;
   padding: 17px;
   color: #fff;
@@ -94,7 +94,7 @@
   justify-content: space-between;
 }
 
-.centered-svg-container{
+.centered-svg-container {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -108,12 +108,12 @@
 
 .dashboard-svg-container {
   position: absolute;
-  top: 40%; left: 50%;
-  transform: translate(-50%,-40%);
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
 }
 
 .arrow-icon {
   transform: rotate(90deg);
   cursor: pointer;
 }
-

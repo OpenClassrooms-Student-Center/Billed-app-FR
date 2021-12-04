@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "live-server --no-browser --ignore=.git,node_modules ./",
+    "prettier:write": "prettier --write .",
     "test": "jest --coverage --noStackTrace --silent"
   },
   "jest": {

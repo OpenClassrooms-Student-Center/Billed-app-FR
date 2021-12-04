@@ -4,7 +4,7 @@ import pctIcon from '../assets/svg/pct.js'
 import eyeWhite from '../assets/svg/eye_white.js'
 import { formatDate } from '../app/format.js'
 
-export const modal = () => (`
+export const modal = () => `
   <div class="modal fade" id="modaleFileAdmin1" data-testid="modaleFileAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
@@ -19,11 +19,10 @@ export const modal = () => (`
       </div>
     </div>
   </div>
-  `)
+  `
 
 export default (bill) => {
-
-  return (`
+  return `
     <div class="container dashboard-form" data-testid="dashboard-form">
       <div class="row">
         <div class="col-sm" id="dashboard-form-col1">
@@ -76,27 +75,35 @@ export default (bill) => {
         </div>
       </div>
       <div class="row">
-       ${bill.status === 'pending' ? (`
+       ${
+         bill.status === 'pending'
+           ? `
         <div class="col-sm">
           <label for="commentary-admin" class="bold-label">Ajouter un commentaire</label>
           <textarea id="commentary2" class="form-control blue-border" data-testid="commentary2" rows="5"></textarea>
         </div>
-       `) : (`
+       `
+           : `
         <div class="col-sm">
           <label for="commentary-admin" class="bold-label">Votre commentaire</label>
           <div class='input-field'> ${bill.commentAdmin} </div>
         </div>
-       `)}
+       `
+       }
       </div>
       <div class="row">
-      ${bill.status === 'pending' ? (`
+      ${
+        bill.status === 'pending'
+          ? `
       <div class="col-sm buttons-flex" style="width: 300px;" >
         <button type="submit" id='btn-refuse-bill' data-testid='btn-refuse-bill-d' class="btn btn-primary">Refuser</button>
         <button type="submit" id='btn-accept-bill' data-testid='btn-accept-bill-d' class="btn btn-primary">Accepter</button>
       </div>
-      `) : ''}
+      `
+          : ''
+      }
     </div>
     ${modal()}
     </div>
-  `)
+  `
 }

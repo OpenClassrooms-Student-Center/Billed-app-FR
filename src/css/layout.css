@@ -4,7 +4,7 @@
 
 .vertical-navbar {
   width: 80px;
-  background-color: #0E5AE5;
+  background-color: #0e5ae5;
   color: #fff;
   height: 150vh;
 }
@@ -46,6 +46,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin:auto;
+  margin: auto;
   border-radius: 8px;
 }
